@@ -1,0 +1,18 @@
+{
+	"required": true,
+	"package": "functional_torchflowers.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"BlockStateLightMixin",
+		"BeeStayInHiveMixin",
+		"BeehiveReleaseMixin",
+		"BeePollinateGoalMixin",
+		"BeeValidateFlowerGoalMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

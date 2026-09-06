@@ -1,0 +1,20 @@
+{
+	"schemaVersion": 1,
+	"id": "functional_torchflowers_test",
+	"version": "${version}",
+	"name": "Functional Torchflowers Game Tests",
+	"environment": "*",
+	"entrypoints": {
+		"fabric-gametest": [
+			"functional_torchflowers.gametest.ModLoadsGameTest",
+			"functional_torchflowers.gametest.TorchflowerLightGameTest",
+			"functional_torchflowers.gametest.TorchflowerBeeHiveGameTest",
+			"functional_torchflowers.gametest.TorchflowerBeeTargetGameTest"
+		]
+	},
+	"depends": {
+		"functional_torchflowers": "*",
+		"fabric-api": "*",
+		"minecraft": "~1.21.11"
+	}
+}
