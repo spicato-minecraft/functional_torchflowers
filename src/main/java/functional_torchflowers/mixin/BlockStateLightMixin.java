@@ -14,8 +14,9 @@ public abstract class BlockStateLightMixin {
 	@Inject(method = "getLightEmission", at = @At("HEAD"), cancellable = true)
 	private void functionalTorchflowers$qualifyingLight(CallbackInfoReturnable<Integer> cir) {
 		BlockState state = (BlockState) (Object) this;
-		if (TorchflowerBeeSupport.isQualifyingTorchflower(state)) {
-			cir.setReturnValue(TorchflowerBeeSupport.LIGHT_LEVEL);
+		int emission = TorchflowerBeeSupport.modLightEmissionOrNeg1(state, null);
+		if (emission >= 0) {
+			cir.setReturnValue(emission);
 		}
 	}
 }

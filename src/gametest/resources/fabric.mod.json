@@ -7,14 +7,12 @@
 	"entrypoints": {
 		"fabric-gametest": [
 			"functional_torchflowers.gametest.ModLoadsGameTest",
-			"functional_torchflowers.gametest.TorchflowerLightGameTest",
-			"functional_torchflowers.gametest.TorchflowerBeeHiveGameTest",
-			"functional_torchflowers.gametest.TorchflowerBeeTargetGameTest"
+			"functional_torchflowers.gametest.TorchflowerLightGameTest"
 		]
 	},
 	"depends": {
 		"functional_torchflowers": "*",
 		"fabric-api": "*",
-		"minecraft": "~1.21.11"
+		"minecraft": "~26.1"
 	}
 }

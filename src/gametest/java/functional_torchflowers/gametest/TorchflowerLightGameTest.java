@@ -11,10 +11,10 @@ import net.minecraft.world.level.block.state.BlockState;
 public class TorchflowerLightGameTest {
 
 	@GameTest(maxTicks = 100)
-	public void placedTorchflowerEmitsEight(GameTestHelper context) {
+	public void placedTorchflowerEmitsFourToEight(GameTestHelper context) {
 		BlockPos pos = new BlockPos(1, 1, 1);
 		context.setBlock(pos, Blocks.TORCHFLOWER);
-		assertLight(context, pos, 8);
+		assertPlacedTorchflowerLight(context, pos);
 		context.succeed();
 	}
 
@@ -42,11 +42,26 @@ public class TorchflowerLightGameTest {
 	}
 
 	private static void assertLight(GameTestHelper context, BlockPos relative, int expected) {
-		int actual = context.getBlockState(relative).getLightEmission();
+		int actual = context.getLevel().getLightEmission(context.absolutePos(relative));
 		context.assertTrue(
 				actual == expected,
 				"light at " + relative + " expected " + expected + " but was " + actual
 						+ " (support=" + TorchflowerBeeSupport.isQualifyingTorchflower(context.getBlockState(relative)) + ")"
+		);
+	}
+
+	private static void assertPlacedTorchflowerLight(GameTestHelper context, BlockPos relative) {
+		BlockPos absolute = context.absolutePos(relative);
+		int actual = context.getLevel().getLightEmission(absolute);
+		int expected = TorchflowerBeeSupport.placedTorchflowerLight(absolute);
+		context.assertTrue(
+				actual >= TorchflowerBeeSupport.PLACED_TORCHFLOWER_LIGHT_MIN
+						&& actual <= TorchflowerBeeSupport.PLACED_TORCHFLOWER_LIGHT_MAX,
+				"placed torchflower light at " + relative + " was " + actual
+		);
+		context.assertTrue(
+				actual == expected,
+				"placed torchflower light at " + relative + " expected " + expected + " but was " + actual
 		);
 	}
 }

@@ -3,7 +3,7 @@
 	"id": "functional_torchflowers",
 	"version": "${version}",
 	"name": "Functional Torchflowers",
-	"description": "Mature torchflowers emit light and are the only flowers bees will leave the hive for at night (weather permitting).",
+	"description": "Mature torchflowers emit light level 8. Bee night work is owned by Busy Bees when that mod is installed.",
 	"authors": [
 		"spicato"
 	],
@@ -26,8 +26,8 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.19.3",
-		"minecraft": "~1.21.11",
-		"java": ">=21",
+		"minecraft": "~26.1",
+		"java": ">=25",
 		"fabric-api": "*"
 	}
 }

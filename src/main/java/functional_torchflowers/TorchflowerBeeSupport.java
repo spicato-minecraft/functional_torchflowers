@@ -13,11 +13,46 @@ import org.jspecify.annotations.Nullable;
 public final class TorchflowerBeeSupport {
 
 	public static final int LIGHT_LEVEL = 8;
+	public static final int PLACED_TORCHFLOWER_LIGHT_MIN = 4;
+	public static final int PLACED_TORCHFLOWER_LIGHT_MAX = 8;
 	/** Product-locked hive search radius (vanilla wander from a known hive is 24). */
 	public static final int HIVE_NECTAR_RANGE = 22;
 	private static final int HIVE_NECTAR_VERTICAL = 8;
+	private static final ThreadLocal<BlockPos> LIGHT_QUERY_POS = new ThreadLocal<>();
 
 	private TorchflowerBeeSupport() {
+	}
+
+	public static void setLightQueryPos(BlockPos pos) {
+		LIGHT_QUERY_POS.set(pos);
+	}
+
+	public static void clearLightQueryPos() {
+		LIGHT_QUERY_POS.remove();
+	}
+
+	/** Stable per-block light for placed {@code torchflower} (not crops). */
+	public static int placedTorchflowerLight(BlockPos pos) {
+		long mix = pos.asLong() * 1103515245L + 12345L;
+		int span = PLACED_TORCHFLOWER_LIGHT_MAX - PLACED_TORCHFLOWER_LIGHT_MIN + 1;
+		return PLACED_TORCHFLOWER_LIGHT_MIN + Math.floorMod(Long.hashCode(mix), span);
+	}
+
+	/**
+	 * Mod light for this block, or {@code -1} when vanilla emission should apply.
+	 */
+	public static int modLightEmissionOrNeg1(BlockState state, @Nullable BlockPos pos) {
+		if (state.is(Blocks.TORCHFLOWER)) {
+			BlockPos at = pos != null ? pos : LIGHT_QUERY_POS.get();
+			if (at == null) {
+				return PLACED_TORCHFLOWER_LIGHT_MAX;
+			}
+			return placedTorchflowerLight(at);
+		}
+		if (state.is(Blocks.TORCHFLOWER_CROP) && state.getValue(TorchflowerCropBlock.AGE) >= 1) {
+			return LIGHT_LEVEL;
+		}
+		return -1;
 	}
 
 	public static boolean isQualifyingTorchflower(BlockState state) {
