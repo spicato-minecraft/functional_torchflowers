@@ -7,7 +7,9 @@
 	"entrypoints": {
 		"fabric-gametest": [
 			"functional_torchflowers.gametest.ModLoadsGameTest",
-			"functional_torchflowers.gametest.TorchflowerLightGameTest"
+			"functional_torchflowers.gametest.TorchflowerLightGameTest",
+			"functional_torchflowers.gametest.ServerMixinApplySweepGameTest",
+			"functional_torchflowers.gametest.NeighborBlockIsLitGameTest"
 		]
 	},
 	"depends": {
