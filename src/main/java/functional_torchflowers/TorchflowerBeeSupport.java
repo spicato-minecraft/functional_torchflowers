@@ -74,12 +74,12 @@ public final class TorchflowerBeeSupport {
 	}
 
 	public static boolean hasQualifyingTorchflowerInRange(Level level, BlockPos origin, int horizontalRange, int verticalRange) {
-		return BlockPos.findClosestMatch(
-				origin,
-				horizontalRange,
-				verticalRange,
-				pos -> isQualifyingTorchflower(level.getBlockState(pos))
-		).isPresent();
+		// 26.3 removed BlockPos.findClosestMatch. Presence only needs the same box:
+		// |dx| <= horizontal, |dy| <= vertical, |dz| <= horizontal.
+		return BlockPos.betweenClosedStream(
+				origin.offset(-horizontalRange, -verticalRange, -horizontalRange),
+				origin.offset(horizontalRange, verticalRange, horizontalRange)
+		).anyMatch(pos -> isQualifyingTorchflower(level.getBlockState(pos)));
 	}
 
 	public static boolean beesStayInHive(Level level, BlockPos searchOrigin, boolean vanillaStay) {
