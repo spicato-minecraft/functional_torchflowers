@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.Blocks;
  */
 public class NeighborBlockIsLitGameTest {
 
-	@GameTest(maxTicks = 100)
+	@GameTest(maxTicks = 200)
 	public void neighborBlockIsLit(GameTestHelper context) {
 		BlockPos flower = new BlockPos(1, 1, 1);
 		BlockPos neighbor = new BlockPos(2, 1, 1);

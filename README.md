@@ -19,7 +19,7 @@ From this directory:
 ./gradlew build
 ```
 
-The output JAR is at `build/libs/functional_torchflowers-1.0.0.jar` (version from `gradle.properties`).
+The output JAR is at `build/libs/functional_torchflowers-1.0.1.jar` (version from `gradle.properties`).
 
 ## Test
 
@@ -29,7 +29,7 @@ The output JAR is at `build/libs/functional_torchflowers-1.0.0.jar` (version fro
 ./gradlew build         # full CI gate (includes both)
 ```
 
-Play the indexed local set from [`../dev-pack`](../dev-pack/README.md) (`./gradlew runClient` there).
+Play Spicato's Vanilla from [`../dev-pack-26.3`](../dev-pack-26.3/README.md) (`./gradlew runClient` there).
 
 ## Install
 

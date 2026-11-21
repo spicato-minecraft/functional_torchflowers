@@ -5,7 +5,8 @@
 	"mixins": [
 		"BlockLightEngineMixin",
 		"BlockStateLightMixin",
-		"LevelLightQueryMixin"
+		"LevelLightQueryMixin",
+		"LightEngineUpdateMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
